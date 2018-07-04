@@ -44,6 +44,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun onBtn1Click() {
-        startActivity(Intent(this, JavascriptActivity::class.java))
+//        startActivity(Intent(this, JavascriptActivity::class.java))
     }
 }
