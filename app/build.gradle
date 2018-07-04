@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.ericho.unsplashdemo"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding{
+        enabled = true
+    }
+}
+ext{
+    supLibVersion="28.0.0-alpha3"
+    okhttp3="3.9.0"
+    anko_version="0.10.5"
+}
+dependencies {
+
+    def lifecycle_version = "1.1.1"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    // android support library
+    implementation "com.android.support:appcompat-v7:$supLibVersion"
+    implementation "com.android.support:support-v4:$supLibVersion"
+    implementation "com.android.support:design:$supLibVersion"
+    implementation "com.android.support:percent:$supLibVersion"
+    implementation "com.android.support:support-annotations:$supLibVersion"
+    implementation "com.android.support:preference-v14:$supLibVersion"
+    implementation "com.android.support:recyclerview-v7:$supLibVersion"
+    implementation "com.android.support:cardview-v7:$supLibVersion"
+    implementation "com.android.support:customtabs:$supLibVersion"
+    // Okhttp 3
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3"
+
+    // alternatively - just ViewModel
+    implementation "android.arch.lifecycle:viewmodel:$lifecycle_version-ktx" // use -ktx for Kotlin
+    // alternatively - just LiveData
+    implementation "android.arch.lifecycle:livedata:$lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$lifecycle_version"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
+    // KTX
+    implementation ('androidx.core:core-ktx:0.3'){
+        transitive = false
+    }
+
+    // Anko (Kotlin)
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    implementation "org.jetbrains.anko:anko-design:$anko_version"
+    // EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    // Setho
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
+
+    //
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
