@@ -2,13 +2,21 @@ package com.ericho.unsplashdemo.home
 
 import android.databinding.BindingAdapter
 import android.widget.ImageView
+import com.ericho.unsplashdemo.GlideApp
 
 object ImageViewBindings {
     @JvmStatic
     @BindingAdapter("android:src")
     fun setImageRes(imageView: ImageView,drawableRes:Int){
-        with(imageView){
-            setImageResource(drawableRes)
-        }
+        GlideApp.with(imageView.context)
+                .load(drawableRes)
+                .into(imageView)
+    }
+    @JvmStatic
+    @BindingAdapter("app:imageUrl")
+    fun setImageUrl(imageView: ImageView,url:String){
+        GlideApp.with(imageView.context)
+                .load(url)
+                .into(imageView)
     }
 }

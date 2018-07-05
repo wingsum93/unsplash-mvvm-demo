@@ -43,7 +43,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="28dp"
             android:scaleType="centerInside"
-            android:src="@{ model.isActive ? model.bigImageRes : model.smallImageRes}"
+            app:imageUrl="@{ model.isActive ? model.firstImageUrl : model.secondImageUrl}"
             tools:src="@drawable/denys_nevozhai_154989_unsplash"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

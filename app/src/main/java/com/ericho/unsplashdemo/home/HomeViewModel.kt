@@ -14,7 +14,8 @@ import com.ericho.unsplashdemo.SingleLiveEvent
 class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     val title: ObservableField<String> = ObservableField()
-    val title2: ObservableField<String> = ObservableField()
+    val firstImageUrl: ObservableField<String> = ObservableField()
+    val secondImageUrl: ObservableField<String> = ObservableField()
     val bigImageRes: ObservableInt = ObservableInt(R.drawable.denys_nevozhai_154989_unsplash)
     val smallImageRes: ObservableInt = ObservableInt(R.drawable.adorable_animal_breed_356378)
     val versionName: ObservableField<String> = ObservableField("v"+BuildConfig.VERSION_NAME)
@@ -31,6 +32,8 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
         handler.postDelayed({
             isActive.set(true)
         },3000)
+        firstImageUrl.set("https://www.weetnow.com/wp-content/uploads/2015/08/Orange.jpg")
+        secondImageUrl.set("https://www.weetnow.com/wp-content/uploads/2015/11/shampoo_1444514a.jpg")
     }
     fun onClickFriend() {
 
