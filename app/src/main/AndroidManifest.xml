@@ -23,7 +23,7 @@
         </activity>
 
         <activity android:name="com.ericho.unsplashdemo.randompage.RandomPageActivity" />
-        <!--<activity android:name="com.ericho.unsplashdemo.JavascriptActivity" />-->
+        <activity android:name="com.ericho.unsplashdemo.category.CategoryActivity" />
     </application>
 
 </manifest>
