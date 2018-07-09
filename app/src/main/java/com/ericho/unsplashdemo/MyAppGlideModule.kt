@@ -24,20 +24,18 @@ class MyAppGlideModule : AppGlideModule() {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
 
-
     }
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        val calculator = MemorySizeCalculator.Builder(context)
-                .setMemoryCacheScreens(2f)
-                .build()
-        builder.setMemoryCache(LruResourceCache(calculator.memoryCacheSize.toLong()));
+
+
         builder.setDefaultRequestOptions(
                 RequestOptions()
                         .format(DecodeFormat.PREFER_ARGB_8888)
                         .disallowHardwareConfig())
 
         builder.setLogLevel(Log.DEBUG)
+        builder.setMemoryCache(LruResourceCache(1024*1024*100))
 
     }
 }

@@ -5,8 +5,8 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
-import com.ericho.androidjsdemo.R
-import com.ericho.androidjsdemo.databinding.ActivityRandomPageBinding
+import com.ericho.unsplashdemo.databinding.ActivityRandomPageBinding
+import com.ericho.unsplashdemo.R
 import com.ericho.unsplashdemo.util.obtainViewModel
 import com.ericho.unsplashdemo.viewimage.ViewImageActivity
 

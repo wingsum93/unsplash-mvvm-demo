@@ -21,7 +21,7 @@
             android:layout_marginStart="144dp"
             android:layout_marginTop="264dp"
             android:onClick="@{() -> model.onClickFriend()}"
-            android:text="method 1"
+            android:text="@{model.function1Text}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
             android:layout_marginStart="144dp"
             android:layout_marginTop="40dp"
             android:onClick="@{() -> model.onClickFriend2()}"
-            android:text="method 2"
+            android:text="@{model.function2Text}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn1" />
 
@@ -43,7 +43,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="28dp"
             android:scaleType="centerInside"
-            app:imageUrl="@{ model.isActive ? model.firstImageUrl : model.secondImageUrl}"
+            app:imageUrl="@{model.firstImageUrl}"
             tools:src="@drawable/denys_nevozhai_154989_unsplash"
             android:onClick="@{()->model.onImageClick()}"
             app:layout_constraintEnd_toEndOf="parent"

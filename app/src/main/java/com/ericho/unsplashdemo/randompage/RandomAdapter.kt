@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.databinding.library.baseAdapters.BR
-import com.ericho.androidjsdemo.databinding.RowPhotoBinding
+import com.ericho.unsplashdemo.databinding.RowPhotoBinding
 import com.ericho.unsplashdemo.data.Photo
 
 

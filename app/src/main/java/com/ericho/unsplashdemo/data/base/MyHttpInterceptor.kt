@@ -1,6 +1,6 @@
 package com.ericho.unsplashdemo.data.base
 
-import com.ericho.androidjsdemo.BuildConfig
+import com.ericho.unsplashdemo.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber

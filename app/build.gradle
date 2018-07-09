@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'de.felixschulze.gradle.hockeyapp'
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -20,6 +19,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug{
+            applicationIdSuffix = ".debug"
+        }
     }
 
     dataBinding{
@@ -32,6 +34,14 @@ ext{
     anko_version="0.10.5"
     roomVersion = "1.1.1"
     espressoVersion = '3.0.1'
+}
+hockeyapp {
+    //nurun api token
+    def HOCKEY_APP_TOKEN = project.findProperty('ERIC_HOCKEY_APP_TOKEN') ?: "empty_token"
+    apiToken = HOCKEY_APP_TOKEN
+    releaseType = 0 // 0 = beta
+    notify = 0
+    status = 2
 }
 dependencies {
 

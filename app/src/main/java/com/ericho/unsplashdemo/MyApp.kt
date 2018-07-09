@@ -1,7 +1,6 @@
 package com.ericho.unsplashdemo
 
 import android.app.Application
-import com.ericho.androidjsdemo.BuildConfig
 import timber.log.Timber
 
 class MyApp :Application() {

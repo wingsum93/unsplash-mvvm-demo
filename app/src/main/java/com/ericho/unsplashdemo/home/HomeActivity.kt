@@ -5,13 +5,13 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.ericho.androidjsdemo.R
-import com.ericho.androidjsdemo.databinding.ActivityHomeBinding
+
+import com.ericho.unsplashdemo.R
 import com.ericho.unsplashdemo.category.CategoryActivity
+import com.ericho.unsplashdemo.databinding.ActivityHomeBinding
 import com.ericho.unsplashdemo.randompage.RandomPageActivity
 import com.ericho.unsplashdemo.util.obtainViewModel
 import com.ericho.unsplashdemo.viewimage.ViewImageActivity
-import org.jetbrains.anko.startActivity
 import timber.log.Timber
 
 
