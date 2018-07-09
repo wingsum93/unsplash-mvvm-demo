@@ -16,9 +16,8 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:maxHeight="300dp"
-            tools:srcCompat="@android:drawable/star_big_off"
-            app:imageUrl="@{obj.link}"/>
+            app:imageUrl="@{obj.link}" />
     </LinearLayout>
 </layout>

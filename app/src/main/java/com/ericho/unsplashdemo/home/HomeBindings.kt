@@ -17,6 +17,7 @@ object ViewBindings {
     fun setImageUrl(imageView: ImageView,url:String){
         GlideApp.with(imageView.context)
                 .load(url)
+                .centerCrop()
                 .into(imageView)
     }
 }
