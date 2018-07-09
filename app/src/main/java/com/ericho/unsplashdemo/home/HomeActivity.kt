@@ -15,7 +15,7 @@ import org.jetbrains.anko.startActivity
 import timber.log.Timber
 
 
-class HomeActivity : AppCompatActivity() {
+open class HomeActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
