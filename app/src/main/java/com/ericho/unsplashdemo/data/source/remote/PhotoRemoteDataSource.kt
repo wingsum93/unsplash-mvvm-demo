@@ -61,6 +61,25 @@ object PhotoRemoteDataSource : PhotoDataSource {
     }
 
     override fun getPhoto(id: String, callback: PhotoDataSource.PhotoCallback) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val z = photoService.getPhoto(id)
+        z.enqueue(object :Callback<PhotoResponse>{
+            override fun onFailure(call: Call<PhotoResponse>?, t: Throwable?) {
+                callback.onError(t!!)
+            }
+
+            override fun onResponse(call: Call<PhotoResponse>?, response: Response<PhotoResponse>?) {
+
+                if (!response!!.isSuccessful) {
+                    callback.onError(IOException("code = ${response.code()}"))
+                }
+
+                val photoResponse = response.body()
+                Timber.d(photoResponse.toString())
+
+                val newP = photoResponse!!.toPhoto()
+
+                callback.onPhotoLoaded(newP)
+            }
+        })
     }
 }

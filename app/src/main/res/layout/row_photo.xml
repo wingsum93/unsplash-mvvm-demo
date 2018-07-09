@@ -6,12 +6,16 @@
         <variable
             name="obj"
             type="com.ericho.unsplashdemo.data.Photo"/>
+        <variable
+            name="listener"
+            type="com.ericho.unsplashdemo.randompage.PhotoClickListener"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:onClick="@{ ()-> listener.onPhotoClicked(obj)}">
 
         <ImageView
             android:id="@+id/imageView"

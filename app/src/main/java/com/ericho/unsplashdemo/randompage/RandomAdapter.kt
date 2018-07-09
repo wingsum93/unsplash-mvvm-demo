@@ -8,7 +8,7 @@ import com.ericho.androidjsdemo.databinding.RowPhotoBinding
 import com.ericho.unsplashdemo.data.Photo
 
 
-class RandomAdapter ():RecyclerView.Adapter<RandomAdapter.ViewHolder>(){
+class RandomAdapter (val viewModel: RandomViewModel):RecyclerView.Adapter<RandomAdapter.ViewHolder>(){
 
     val items:MutableList<Photo> = mutableListOf()
 
@@ -25,7 +25,17 @@ class RandomAdapter ():RecyclerView.Adapter<RandomAdapter.ViewHolder>(){
 
     override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
         val a = items[p1]
-        holder.bind(a)
+
+        val listener =object :PhotoClickListener{
+            override fun onPhotoClicked(photo: Photo) {
+                viewModel.imageClickEvent.value = photo.link
+            }
+        }
+        with(holder.binding){
+            setVariable(BR.obj,a)
+            setVariable(BR.listener,listener)
+            executePendingBindings()
+        }
     }
 
 
@@ -34,11 +44,12 @@ class RandomAdapter ():RecyclerView.Adapter<RandomAdapter.ViewHolder>(){
         this.items.addAll(items)
         notifyDataSetChanged()
     }
-    inner class ViewHolder(private val mBinding: RowPhotoBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    inner class ViewHolder(val binding: RowPhotoBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(photo: Photo) {
-            mBinding.setVariable(BR.obj,photo)
-            mBinding.executePendingBindings()
+            binding.setVariable(BR.obj,photo)
+            binding.executePendingBindings()
         }
+
     }
 }

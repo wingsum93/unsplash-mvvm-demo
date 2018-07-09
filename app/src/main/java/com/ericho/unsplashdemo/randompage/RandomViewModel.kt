@@ -16,7 +16,7 @@ class RandomViewModel(
     val title: Observer<String> = Observer { }
     val title2: Observer<String> = Observer { }
 
-    val btn1Command = SingleLiveEvent<Void>()
+    val imageClickEvent = SingleLiveEvent<String>()
     val btn2Command = SingleLiveEvent<Void>()
 
     val items: ObservableList<Photo> = ObservableArrayList()
