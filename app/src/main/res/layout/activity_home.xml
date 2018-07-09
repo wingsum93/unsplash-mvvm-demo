@@ -45,6 +45,7 @@
             android:scaleType="centerInside"
             app:imageUrl="@{ model.isActive ? model.firstImageUrl : model.secondImageUrl}"
             tools:src="@drawable/denys_nevozhai_154989_unsplash"
+            android:onClick="@{()->model.onImageClick()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

@@ -3,6 +3,7 @@ package com.ericho.unsplashdemo.data.base
 import com.ericho.androidjsdemo.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
+import timber.log.Timber
 
 /**
  * Created by steve_000 on 9/7/2018.
@@ -19,7 +20,9 @@ class MyHttpInterceptor:Interceptor{
                 .addHeader("Accept-Version"," v1")
                 .addHeader("Authorization","Client-ID ${BuildConfig.SPLASH_ACCESS_KEY}")
                 .build()
+        val response = chain.proceed(newReq)
 
-        return chain.proceed(newReq)
+        Timber.d("my headeers = ${response.headers()}")
+        return response
     }
 }

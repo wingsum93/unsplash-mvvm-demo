@@ -22,6 +22,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.support.annotation.VisibleForTesting
 import com.ericho.unsplashdemo.home.HomeViewModel
 import com.ericho.unsplashdemo.randompage.RandomViewModel
+import com.ericho.unsplashdemo.viewimage.ViewImageViewModel
 
 @Suppress("UNCHECKED_CAST")
 /**
@@ -40,10 +41,12 @@ class ViewModelFactory private constructor(
             with(modelClass) {
                 when {
                     isAssignableFrom(HomeViewModel::class.java) ->
-                        HomeViewModel(application,Injection.getAny(application))
+                        HomeViewModel(application,Injection.getPhotoRepository(application))
 
                     isAssignableFrom(RandomViewModel::class.java) ->
-                        RandomViewModel()
+                        RandomViewModel(Injection.getPhotoRepository(application))
+                    isAssignableFrom(ViewImageViewModel::class.java) ->
+                            ViewImageViewModel()
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

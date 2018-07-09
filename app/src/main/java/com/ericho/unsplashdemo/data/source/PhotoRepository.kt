@@ -4,11 +4,11 @@ import com.ericho.unsplashdemo.data.Photo
 import com.ericho.unsplashdemo.data.source.remote.PhotoResponse
 
 class PhotoRepository(
-        val photoRemoteDataSource: PhotoDataSource,
-        val photoLocalDataSource: PhotoDataSource
+        private val photoRemoteDataSource: PhotoDataSource,
+        private val photoLocalDataSource: PhotoDataSource
 ) : PhotoDataSource {
 
-    val cache:MutableMap<String,Photo> = mutableMapOf()
+    private val cache:MutableMap<String,Photo> = mutableMapOf()
 
 
 
@@ -48,6 +48,10 @@ class PhotoRepository(
                 callback.onError(e)
             }
         })
+    }
+
+    override fun listPhoto(callback: PhotoDataSource.LoadPhotoCallback) {
+        photoRemoteDataSource.listPhoto( callback)
     }
 
     companion object {

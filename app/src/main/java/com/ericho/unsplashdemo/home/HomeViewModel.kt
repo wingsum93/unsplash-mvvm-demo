@@ -17,14 +17,14 @@ class HomeViewModel(app: Application,photoDataSource: PhotoDataSource) : Android
     val title: ObservableField<String> = ObservableField()
     val firstImageUrl: ObservableField<String> = ObservableField()
     val secondImageUrl: ObservableField<String> = ObservableField()
-    val bigImageRes: ObservableInt = ObservableInt(R.drawable.denys_nevozhai_154989_unsplash)
-    val smallImageRes: ObservableInt = ObservableInt(R.drawable.adorable_animal_breed_356378)
+
     val versionName: ObservableField<String> = ObservableField("v"+BuildConfig.VERSION_NAME)
     @JvmField
     val isActive: ObservableBoolean = ObservableBoolean(false)
 
     val btn1Command = SingleLiveEvent<Void>()
     val btn2Command = SingleLiveEvent<Void>()
+    val imageClickCommand = SingleLiveEvent<String>()
 
     private lateinit var handler:Handler
 
@@ -55,5 +55,9 @@ class HomeViewModel(app: Application,photoDataSource: PhotoDataSource) : Android
     fun onClickFriend2() {
 
         btn2Command.call()
+    }
+
+    fun onImageClick(){
+        imageClickCommand.value = firstImageUrl.get()
     }
 }

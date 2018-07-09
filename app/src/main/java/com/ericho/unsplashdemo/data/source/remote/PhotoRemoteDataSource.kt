@@ -34,6 +34,30 @@ object PhotoRemoteDataSource : PhotoDataSource {
                 callback.onPhotoLoaded(newP)
             }
         })
+
+
+    }
+
+    override fun listPhoto(callback: PhotoDataSource.LoadPhotoCallback) {
+        val aaaCall = photoService.listPhoto()
+        aaaCall.enqueue(object :Callback<List<PhotoResponse>>{
+            override fun onFailure(call: Call<List<PhotoResponse>>?, t: Throwable?) {
+                callback.onError(t!!)
+            }
+
+            override fun onResponse(call: Call<List<PhotoResponse>>?, response: Response<List<PhotoResponse>>?) {
+                if (!response!!.isSuccessful) {
+                    callback.onError(IOException("code = ${response.code()}"))
+                }
+
+                val list = response.body()
+
+                Timber.d("ABC")
+
+                val newList = list?.map { it.toPhoto() } ?: listOf()
+                callback.onPhotoLoaded(newList)
+            }
+        })
     }
 
     override fun getPhoto(id: String, callback: PhotoDataSource.PhotoCallback) {

@@ -9,7 +9,7 @@ import com.ericho.unsplashdemo.util.AppExecutors
 
 object Injection {
 
-    fun getAny(context: Context): PhotoRepository {
+    fun getPhotoRepository(context: Context): PhotoRepository {
         val database = MyDatabase.getInstance(context)
         return PhotoRepository.getInstance(PhotoRemoteDataSource,
                 PhotoLocalDataSource.getInstance(AppExecutors(), database.photoDao()))

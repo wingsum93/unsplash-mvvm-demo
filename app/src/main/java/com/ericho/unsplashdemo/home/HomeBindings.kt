@@ -4,7 +4,7 @@ import android.databinding.BindingAdapter
 import android.widget.ImageView
 import com.ericho.unsplashdemo.GlideApp
 
-object ImageViewBindings {
+object ViewBindings {
     @JvmStatic
     @BindingAdapter("android:src")
     fun setImageRes(imageView: ImageView,drawableRes:Int){

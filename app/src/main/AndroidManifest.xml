@@ -24,6 +24,7 @@
 
         <activity android:name="com.ericho.unsplashdemo.randompage.RandomPageActivity" />
         <activity android:name="com.ericho.unsplashdemo.category.CategoryActivity" />
+        <activity android:name="com.ericho.unsplashdemo.viewimage.ViewImageActivity" />
     </application>
 
 </manifest>

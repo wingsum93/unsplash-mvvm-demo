@@ -21,6 +21,15 @@ interface PhotoService {
     @GET("/photos/random")
     fun getRandomImage():Call<PhotoResponse>
 
+    /**
+     *
+     * @see <a href="https://unsplash.com/documentation#list-photos">Detail Doc</a>
+     * @param order_by Valid values: latest, oldest, popular; default: latest
+     */
+    @GET("/photos")
+    fun listPhoto(@Query("page") page:Int = 1,
+                    @Query("per_page") per_page:Int = 10,
+                    @Query("order_by") order_by:String = "latest"):Call<List<PhotoResponse>>
 
 
     companion object Factory{

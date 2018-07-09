@@ -1,12 +1,18 @@
 package com.ericho.unsplashdemo.home
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.ericho.androidjsdemo.R
 import com.ericho.androidjsdemo.databinding.ActivityHomeBinding
+import com.ericho.unsplashdemo.category.CategoryActivity
+import com.ericho.unsplashdemo.randompage.RandomPageActivity
 import com.ericho.unsplashdemo.util.obtainViewModel
+import com.ericho.unsplashdemo.viewimage.ViewImageActivity
+import org.jetbrains.anko.startActivity
+import timber.log.Timber
 
 
 class HomeActivity : AppCompatActivity() {
@@ -30,14 +36,26 @@ class HomeActivity : AppCompatActivity() {
                     Observer { act.onBtn1Click() })
             btn2Command.observe(act,
                     Observer { act.onBtn2Click() })
+            imageClickCommand.observe(act,
+                    Observer { link -> act.onImageClick(link) })
+        }
+    }
+
+    private fun onImageClick(link: String?) {
+        link?.apply {
+            Timber.d("link clicked: $link")
+            val i = ViewImageActivity.newIntent(this@HomeActivity,link)
+            startActivity(i)
         }
     }
 
     private fun onBtn2Click() {
-//        startActivity(Intent(this, JavascriptActivity2::class.java))
+        startActivity(Intent(this, CategoryActivity::class.java))
     }
 
     private fun onBtn1Click() {
-//        startActivity(Intent(this, JavascriptActivity::class.java))
+        startActivity(Intent(this, RandomPageActivity::class.java))
     }
+
+
 }
