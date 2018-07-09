@@ -26,7 +26,7 @@ open class HomeActivity : AppCompatActivity() {
         binding.model = model
 
         subscribeListener(model)
-
+        val aaa = getString(R.string.abc)
     }
 
     private fun subscribeListener(model: HomeViewModel) {

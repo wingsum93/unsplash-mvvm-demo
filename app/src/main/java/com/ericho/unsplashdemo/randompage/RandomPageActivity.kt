@@ -19,9 +19,10 @@ class RandomPageActivity :AppCompatActivity(){
         val binding: ActivityRandomPageBinding = DataBindingUtil.setContentView(this, R.layout.activity_random_page)
 
         val model = obtainViewModel(RandomViewModel::class.java)
-        binding.model = model
         setUnAdapter(model)
         subscribeForEvent(model)
+        binding.model = model
+
     }
 
     private fun subscribeForEvent(model:RandomViewModel) {
