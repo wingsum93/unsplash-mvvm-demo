@@ -12,7 +12,7 @@ object PhotoRemoteDataSource : PhotoDataSource {
 
     val photoService:PhotoService by lazy { PhotoService.Factory.create() }
 
-    override fun getPhoto(callback: PhotoDataSource.PhotoCallback) {
+    override fun getRandomPhoto(callback: PhotoDataSource.PhotoCallback) {
 
         val z = photoService.getRandomImage()
         z.enqueue(object :Callback<PhotoResponse>{
@@ -29,8 +29,14 @@ object PhotoRemoteDataSource : PhotoDataSource {
                 val photoResponse = response.body()
                 Timber.d(photoResponse.toString())
 
-                callback.onPhotoLoaded(Photo())
+                val newP = photoResponse!!.toPhoto()
+
+                callback.onPhotoLoaded(newP)
             }
         })
+    }
+
+    override fun getPhoto(id: String, callback: PhotoDataSource.PhotoCallback) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

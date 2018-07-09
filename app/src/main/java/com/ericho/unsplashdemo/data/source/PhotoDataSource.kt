@@ -5,7 +5,8 @@ import com.ericho.unsplashdemo.data.Photo
 interface PhotoDataSource {
 
 
-    fun getPhoto(callback: PhotoCallback)
+    fun getRandomPhoto(callback: PhotoCallback)
+    fun getPhoto(id:String,callback: PhotoCallback)
 
 
     interface PhotoCallback{

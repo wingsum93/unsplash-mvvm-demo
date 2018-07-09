@@ -1,15 +1,53 @@
 package com.ericho.unsplashdemo.data.source
 
 import com.ericho.unsplashdemo.data.Photo
+import com.ericho.unsplashdemo.data.source.remote.PhotoResponse
 
 class PhotoRepository(
         val photoRemoteDataSource: PhotoDataSource,
         val photoLocalDataSource: PhotoDataSource
 ) : PhotoDataSource {
 
+    val cache:MutableMap<String,Photo> = mutableMapOf()
 
-    override fun getPhoto(callback: PhotoDataSource.PhotoCallback) {
-        photoRemoteDataSource.getPhoto(callback)
+
+
+    override fun getRandomPhoto(callback: PhotoDataSource.PhotoCallback) {
+
+        if (cache.get("random") !=null){
+            val a = cache.get("random")
+            return callback.onPhotoLoaded(a!!)
+        }
+
+
+        photoRemoteDataSource.getRandomPhoto(object :PhotoDataSource.PhotoCallback{
+            override fun onPhotoLoaded(photo: Photo) {
+                cache.put("random",photo)
+                callback.onPhotoLoaded(photo)
+            }
+
+            override fun onError(e: Throwable) {
+                callback.onError(e)
+            }
+        })
+    }
+
+    override fun getPhoto(id: String, callback: PhotoDataSource.PhotoCallback) {
+        if (cache.get(id) !=null){
+            val a = cache.get(id)
+            return callback.onPhotoLoaded(a!!)
+        }
+
+        photoRemoteDataSource.getPhoto(id,object :PhotoDataSource.PhotoCallback{
+            override fun onPhotoLoaded(photo: Photo) {
+                cache.put(id,photo)
+                callback.onPhotoLoaded(photo)
+            }
+
+            override fun onError(e: Throwable) {
+                callback.onError(e)
+            }
+        })
     }
 
     companion object {

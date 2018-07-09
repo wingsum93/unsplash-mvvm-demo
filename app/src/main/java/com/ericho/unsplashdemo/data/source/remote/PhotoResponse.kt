@@ -1,5 +1,7 @@
 package com.ericho.unsplashdemo.data.source.remote
 
+import com.ericho.unsplashdemo.data.Photo
+
 /**
  * Created by steve_000 on 9/7/2018.
  * for project unsplash-mvvm-demo
@@ -10,7 +12,11 @@ data class PhotoResponse (
     val created_at:String= "",
     val updated_at:String= "",
     val color:String = "",
-
+    val views:Int = 0,
+    val downloads:Int = 0,
+    val likes:Int = 0,
+    val description:String? ="",
+//    val categories:List<String> = listOf(),
     val urls:Urls,
     val links:Links)
 {
@@ -27,4 +33,12 @@ data class PhotoResponse (
             val small:String,
             val thumb:String
     )
+
+
+    fun toPhoto(): Photo{
+        val a = Photo(id = id,description = description ?: "",
+                likes = likes,downloads = downloads,
+                link = urls.regular)
+        return a
+    }
 }

@@ -2,7 +2,6 @@ package com.ericho.unsplashdemo.home
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.Observer
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
@@ -37,9 +36,9 @@ class HomeViewModel(app: Application,photoDataSource: PhotoDataSource) : Android
         firstImageUrl.set("https://www.weetnow.com/wp-content/uploads/2015/08/Orange.jpg")
         secondImageUrl.set("https://www.weetnow.com/wp-content/uploads/2015/11/shampoo_1444514a.jpg")
 
-        photoDataSource.getPhoto(object :PhotoDataSource.PhotoCallback{
+        photoDataSource.getRandomPhoto(object :PhotoDataSource.PhotoCallback{
             override fun onPhotoLoaded(photo: Photo) {
-
+                firstImageUrl.set(photo.link)
             }
 
             override fun onError(e: Throwable) {

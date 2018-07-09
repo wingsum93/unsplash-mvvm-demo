@@ -11,7 +11,11 @@ class PhotoLocalDataSource private constructor(
 ) : PhotoDataSource {
 
 
-    override fun getPhoto(callback: PhotoDataSource.PhotoCallback) {
+    override fun getRandomPhoto(callback: PhotoDataSource.PhotoCallback) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getPhoto(id: String, callback: PhotoDataSource.PhotoCallback) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
