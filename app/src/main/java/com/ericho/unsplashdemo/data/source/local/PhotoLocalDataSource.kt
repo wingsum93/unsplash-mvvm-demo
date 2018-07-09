@@ -11,6 +11,10 @@ class PhotoLocalDataSource private constructor(
 ) : PhotoDataSource {
 
 
+    override fun getPhoto(callback: PhotoDataSource.PhotoCallback) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     companion object {
         private var INSTANCE: PhotoLocalDataSource? = null
 

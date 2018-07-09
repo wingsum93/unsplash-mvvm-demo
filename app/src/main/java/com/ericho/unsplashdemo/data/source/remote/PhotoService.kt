@@ -2,7 +2,11 @@ package com.ericho.unsplashdemo.data.source.remote
 
 import com.ericho.unsplashdemo.IConstant
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * Created by steve_000 on 9/7/2018.
@@ -12,8 +16,8 @@ import retrofit2.http.*
  */
 interface PhotoService {
 
-    @GET("/photos/")
-    fun getPhoto(@Query("id") id:String):Call<PhotoResponse>
+    @GET("/photos/{id}")
+    fun getPhoto(@Path("id") id:String):Call<PhotoResponse>
     @GET("/photos/random")
     fun getRandomImage():Call<PhotoResponse>
 
@@ -23,8 +27,8 @@ interface PhotoService {
 
 
         fun create():PhotoService{
-            val retrofit = retrofit2.Retrofit.Builder()
-                    .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create())
+            val retrofit = Retrofit.Builder()
+                    .addConverterFactory(GsonConverterFactory.create())
                     .client(MyOkhttpClient.getInstance())
                     .baseUrl(IConstant.BASE_URL)
                     .build()

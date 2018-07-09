@@ -40,7 +40,7 @@ class ViewModelFactory private constructor(
             with(modelClass) {
                 when {
                     isAssignableFrom(HomeViewModel::class.java) ->
-                        HomeViewModel(application)
+                        HomeViewModel(application,Injection.getAny(application))
 
                     isAssignableFrom(RandomViewModel::class.java) ->
                         RandomViewModel()

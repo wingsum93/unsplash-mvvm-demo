@@ -1,5 +1,6 @@
 package com.ericho.unsplashdemo.data.base
 
+import com.ericho.androidjsdemo.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -16,6 +17,7 @@ class MyHttpInterceptor:Interceptor{
 
         val newReq = request.newBuilder()
                 .addHeader("Accept-Version"," v1")
+                .addHeader("Authorization","Client-ID ${BuildConfig.SPLASH_ACCESS_KEY}")
                 .build()
 
         return chain.proceed(newReq)

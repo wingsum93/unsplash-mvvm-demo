@@ -1,5 +1,6 @@
 package com.ericho.unsplashdemo.data.source.remote
 
+import com.ericho.unsplashdemo.data.base.MyHttpInterceptor
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
@@ -23,6 +24,7 @@ object MyOkhttpClient {
         val builder = OkHttpClient.Builder()
         builder.apply {
             connectTimeout(10,TimeUnit.SECONDS)
+            addInterceptor(MyHttpInterceptor())
         }
         return builder.build()
     }

@@ -10,8 +10,10 @@ import android.os.Handler
 import com.ericho.androidjsdemo.BuildConfig
 import com.ericho.androidjsdemo.R
 import com.ericho.unsplashdemo.SingleLiveEvent
+import com.ericho.unsplashdemo.data.Photo
+import com.ericho.unsplashdemo.data.source.PhotoDataSource
 
-class HomeViewModel(app: Application) : AndroidViewModel(app) {
+class HomeViewModel(app: Application,photoDataSource: PhotoDataSource) : AndroidViewModel(app) {
 
     val title: ObservableField<String> = ObservableField()
     val firstImageUrl: ObservableField<String> = ObservableField()
@@ -34,6 +36,16 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
         },3000)
         firstImageUrl.set("https://www.weetnow.com/wp-content/uploads/2015/08/Orange.jpg")
         secondImageUrl.set("https://www.weetnow.com/wp-content/uploads/2015/11/shampoo_1444514a.jpg")
+
+        photoDataSource.getPhoto(object :PhotoDataSource.PhotoCallback{
+            override fun onPhotoLoaded(photo: Photo) {
+
+            }
+
+            override fun onError(e: Throwable) {
+
+            }
+        })
     }
     fun onClickFriend() {
 

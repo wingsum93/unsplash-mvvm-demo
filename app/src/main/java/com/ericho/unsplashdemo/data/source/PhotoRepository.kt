@@ -1,10 +1,16 @@
 package com.ericho.unsplashdemo.data.source
 
+import com.ericho.unsplashdemo.data.Photo
+
 class PhotoRepository(
         val photoRemoteDataSource: PhotoDataSource,
         val photoLocalDataSource: PhotoDataSource
 ) : PhotoDataSource {
 
+
+    override fun getPhoto(callback: PhotoDataSource.PhotoCallback) {
+        photoRemoteDataSource.getPhoto(callback)
+    }
 
     companion object {
 
