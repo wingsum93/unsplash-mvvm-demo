@@ -10,6 +10,7 @@ functions to be demo:
 * test my wrapper for retrofit class
 * test unsplash image api
 * Hockeyapp SDK integration
+* 属性双向绑定 (receive editText change)
 
 
 ## Ref
