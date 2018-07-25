@@ -14,7 +14,8 @@ object ViewBindings {
     }
     @JvmStatic
     @BindingAdapter("app:imageUrl")
-    fun setImageUrl(imageView: ImageView,url:String){
+    fun setImageUrl(imageView: ImageView, url: String?) {
+        if (url == null) return
         GlideApp.with(imageView.context)
                 .load(url)
                 .centerCrop()

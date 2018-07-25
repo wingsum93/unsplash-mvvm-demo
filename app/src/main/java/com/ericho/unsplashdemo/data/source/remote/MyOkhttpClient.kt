@@ -1,6 +1,7 @@
 package com.ericho.unsplashdemo.data.source.remote
 
 import com.ericho.unsplashdemo.data.base.MyHttpInterceptor
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
@@ -25,6 +26,7 @@ object MyOkhttpClient {
         builder.apply {
             connectTimeout(10,TimeUnit.SECONDS)
             addInterceptor(MyHttpInterceptor())
+            addNetworkInterceptor(StethoInterceptor())
         }
         return builder.build()
     }

@@ -4,14 +4,11 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
-import android.os.Handler
 import com.ericho.unsplashdemo.BuildConfig
 import com.ericho.unsplashdemo.SingleLiveEvent
-import com.ericho.unsplashdemo.data.Photo
 import com.ericho.unsplashdemo.data.Result
 import com.ericho.unsplashdemo.data.source.PhotoDataSource
 import kotlinx.coroutines.experimental.launch
-import timber.log.Timber
 
 class HomeViewModel(app: Application,val photoDataSource: PhotoDataSource) : AndroidViewModel(app) {
 
@@ -30,7 +27,7 @@ class HomeViewModel(app: Application,val photoDataSource: PhotoDataSource) : And
 
 
     init {
-        firstImageUrl.set("https://www.weetnow.com/wp-content/uploads/2015/08/Orange.jpg")
+
         function1Text.set("List Latest Image")
         function2Text.set("Other")
 

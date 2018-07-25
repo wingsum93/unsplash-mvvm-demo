@@ -49,7 +49,7 @@ object PhotoRemoteDataSource : PhotoDataSource {
     }
 
     override suspend fun listPhoto(): Result<List<Photo>> = suspendCoroutine{
-        val z = photoService.listPhoto()
+        val z = photoService.listPhoto(per_page = 40)
         z.enqueue(object :Callback<List<PhotoResponse>>{
             override fun onFailure(call: Call<List<PhotoResponse>>?, t: Throwable?) {
                 it.resume(Result.Failure(t))
@@ -67,5 +67,13 @@ object PhotoRemoteDataSource : PhotoDataSource {
             }
         })
 
+    }
+
+    override suspend fun savePhoto(id: String, photo: Photo) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun savePhoto(photos: List<Photo>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

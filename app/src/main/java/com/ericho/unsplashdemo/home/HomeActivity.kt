@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import com.ericho.unsplashdemo.R
 import com.ericho.unsplashdemo.category.CategoryActivity
 import com.ericho.unsplashdemo.databinding.ActivityHomeBinding
-import com.ericho.unsplashdemo.randompage.RandomPageActivity
+import com.ericho.unsplashdemo.randompage.ImageListActivity
 import com.ericho.unsplashdemo.util.obtainViewModel
 import com.ericho.unsplashdemo.viewimage.ViewImageActivity
 import timber.log.Timber
@@ -54,7 +54,7 @@ open class HomeActivity : AppCompatActivity() {
     }
 
     private fun onBtn1Click() {
-        startActivity(Intent(this, RandomPageActivity::class.java))
+        startActivity(Intent(this, ImageListActivity::class.java))
     }
 
 

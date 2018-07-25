@@ -27,14 +27,21 @@ class PhotoRepository(
     }
 
     override suspend fun getPhoto(id: String): Result<Photo> {
-        if (cache[id] !=null){
-            val a = cache[id]!!
-            return Result.Success(a)
+//        if (cache[id] !=null){
+//            val a = cache[id]!!
+//            return Result.Success(a)
+//        }
+        val trial = photoLocalDataSource.getPhoto(id)
+        if (trial is Result.Success) {
+            return trial
         }
 
-        val r = photoRemoteDataSource.getRandomPhoto()
+        val r = photoRemoteDataSource.getPhoto(id)
         when(r){
-            is Result.Success -> cache[id] = r.data
+            is Result.Success -> {
+                cache[id] = r.data
+                photoLocalDataSource.savePhoto(r.data.id, r.data)
+            }
         }
         return r
     }
@@ -47,11 +54,19 @@ class PhotoRepository(
         when(r){
             is Result.Success ->{
                 // cache to local
+                photoLocalDataSource.savePhoto(r.data)
             }
         }
         return r
     }
 
+    override suspend fun savePhoto(id: String, photo: Photo) {
+        photoLocalDataSource.savePhoto(id, photo)
+    }
+
+    override suspend fun savePhoto(photos: List<Photo>) {
+        photoLocalDataSource.savePhoto(photos)
+    }
 
     companion object {
 

@@ -11,5 +11,6 @@ interface PhotoDataSource {
 
     suspend fun listPhoto():Result<List<Photo>>
 
-
+    suspend fun savePhoto(id: String, photo: Photo)
+    suspend fun savePhoto(photos: List<Photo>)
 }

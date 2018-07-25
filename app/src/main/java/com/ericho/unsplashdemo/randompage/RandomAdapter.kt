@@ -4,11 +4,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.databinding.library.baseAdapters.BR
-import com.ericho.unsplashdemo.databinding.RowPhotoBinding
 import com.ericho.unsplashdemo.data.Photo
+import com.ericho.unsplashdemo.databinding.RowPhotoBinding
 
 
-class RandomAdapter (val viewModel: RandomViewModel):RecyclerView.Adapter<RandomAdapter.ViewHolder>(){
+class RandomAdapter(val viewModel: ImageListViewModel) : RecyclerView.Adapter<RandomAdapter.ViewHolder>() {
 
     val items:MutableList<Photo> = mutableListOf()
 

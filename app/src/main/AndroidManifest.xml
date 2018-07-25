@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".randompage.RandomPageActivity" />
+        <activity android:name=".randompage.ImageListActivity" />
         <activity android:name=".category.CategoryActivity" />
         <activity android:name=".viewimage.ViewImageActivity" />
     </application>

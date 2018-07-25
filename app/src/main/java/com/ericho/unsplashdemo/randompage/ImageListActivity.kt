@@ -5,29 +5,29 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
-import com.ericho.unsplashdemo.databinding.ActivityRandomPageBinding
 import com.ericho.unsplashdemo.R
+import com.ericho.unsplashdemo.databinding.ActivityImageListBinding
 import com.ericho.unsplashdemo.util.obtainViewModel
 import com.ericho.unsplashdemo.viewimage.ViewImageActivity
 
-class RandomPageActivity :AppCompatActivity(){
+class ImageListActivity : AppCompatActivity() {
 
     lateinit var adapter: RandomAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityRandomPageBinding = DataBindingUtil.setContentView(this, R.layout.activity_random_page)
+        val binding: ActivityImageListBinding = DataBindingUtil.setContentView(this, R.layout.activity_image_list)
 
-        val model = obtainViewModel(RandomViewModel::class.java)
+        val model = obtainViewModel(ImageListViewModel::class.java)
         setUnAdapter(model)
         subscribeForEvent(model)
         binding.model = model
 
     }
 
-    private fun subscribeForEvent(model:RandomViewModel) {
-        model.apply { 
-            val act = this@RandomPageActivity
+    private fun subscribeForEvent(model: ImageListViewModel) {
+        model.apply {
+            val act = this@ImageListActivity
             imageClickEvent.observe(act,
                     Observer { it-> act.openDetailPage(it) })
         }
@@ -38,7 +38,7 @@ class RandomPageActivity :AppCompatActivity(){
         startActivity(i)
     }
 
-    private fun setUnAdapter( viewModel: RandomViewModel){
+    private fun setUnAdapter(viewModel: ImageListViewModel) {
         adapter = RandomAdapter(viewModel)
         findViewById<RecyclerView>(R.id.recyclerView).adapter = adapter
     }
