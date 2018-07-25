@@ -9,6 +9,8 @@ import com.ericho.unsplashdemo.data.Photo
 import com.ericho.unsplashdemo.data.Result
 import com.ericho.unsplashdemo.data.source.PhotoDataSource
 import com.ericho.unsplashdemo.data.source.PhotoRepository
+import com.ericho.unsplashdemo.util.onError
+import com.ericho.unsplashdemo.util.onSuccess
 import kotlinx.coroutines.experimental.launch
 
 class RandomViewModel(
@@ -38,6 +40,13 @@ class RandomViewModel(
                 addAll(photos.data)
             }
         }
+        photos.onSuccess {
+            items.apply{
+                clear()
+                addAll(it)
+            }
+        }
+        photos.onError {  }
 
     }
 }

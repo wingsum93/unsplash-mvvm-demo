@@ -12,17 +12,4 @@ interface PhotoDataSource {
     suspend fun listPhoto():Result<List<Photo>>
 
 
-    interface PhotoCallback{
-
-        fun onPhotoLoaded(photo:Photo)
-
-        fun onError(e:Throwable)
-    }
-
-    interface LoadPhotoCallback{
-
-        fun onPhotoLoaded(photos:List<Photo>)
-
-        fun onError(e:Throwable)
-    }
 }
