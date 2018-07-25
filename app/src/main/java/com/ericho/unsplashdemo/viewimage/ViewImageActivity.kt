@@ -5,8 +5,8 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.ericho.unsplashdemo.databinding.ActivityViewImageBinding
 import com.ericho.unsplashdemo.R
+import com.ericho.unsplashdemo.databinding.ActivityViewImageBinding
 import com.ericho.unsplashdemo.util.obtainViewModel
 
 class ViewImageActivity :AppCompatActivity(){
@@ -15,7 +15,7 @@ class ViewImageActivity :AppCompatActivity(){
         super.onCreate(savedInstanceState)
         val binding:ActivityViewImageBinding = DataBindingUtil.setContentView(this, R.layout.activity_view_image)
 
-        val model = obtainViewModel(ViewImageViewModel::class.java)
+        val model = obtainViewModel<ViewImageViewModel>()
         binding.model = model
 
 

@@ -21,7 +21,7 @@ class CategoryActivity :AppCompatActivity(){
         super.onCreate(savedInstanceState)
         val binding: ActivityCategoryBinding = DataBindingUtil.setContentView(this, R.layout.activity_category)
 
-        val model = obtainViewModel(CategoryViewModel::class.java)
+        val model = obtainViewModel<CategoryViewModel>()
         binding.model = model
 
         subscribeListener(model)

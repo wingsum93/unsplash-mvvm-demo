@@ -62,8 +62,8 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
     }
 }
 
-fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
-        ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(viewModelClass)
+inline fun <reified T : ViewModel> AppCompatActivity.obtainViewModel() =
+        ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(T::class.java)
 
 /**
  * Runs a FragmentTransaction, then calls commit().

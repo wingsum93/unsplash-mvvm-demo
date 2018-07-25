@@ -22,11 +22,10 @@ open class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityHomeBinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
 
-        val model = obtainViewModel(HomeViewModel::class.java)
+        val model = obtainViewModel<HomeViewModel>()
         binding.model = model
 
         subscribeListener(model)
-        val aaa = getString(R.string.abc)
     }
 
     private fun subscribeListener(model: HomeViewModel) {

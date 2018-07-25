@@ -18,7 +18,7 @@ class ImageListActivity : AppCompatActivity() {
 
         val binding: ActivityImageListBinding = DataBindingUtil.setContentView(this, R.layout.activity_image_list)
 
-        val model = obtainViewModel(ImageListViewModel::class.java)
+        val model = obtainViewModel<ImageListViewModel>()
         setUnAdapter(model)
         subscribeForEvent(model)
         binding.model = model
