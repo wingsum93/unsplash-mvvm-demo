@@ -1,8 +1,11 @@
 package com.ericho.unsplashdemo.data.source.local
 
 import android.support.annotation.VisibleForTesting
+import com.ericho.unsplashdemo.data.Photo
+import com.ericho.unsplashdemo.data.Result
 import com.ericho.unsplashdemo.data.source.PhotoDataSource
 import com.ericho.unsplashdemo.util.AppExecutors
+
 
 class PhotoLocalDataSource private constructor(
 
@@ -11,15 +14,15 @@ class PhotoLocalDataSource private constructor(
 ) : PhotoDataSource {
 
 
-    override fun getRandomPhoto(callback: PhotoDataSource.PhotoCallback) {
+    override suspend fun getRandomPhoto(): Result<Photo> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getPhoto(id: String, callback: PhotoDataSource.PhotoCallback) {
+    override suspend fun getPhoto(id: String): Result<Photo> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun listPhoto( callback: PhotoDataSource.LoadPhotoCallback) {
+    override suspend fun listPhoto(): Result<List<Photo>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

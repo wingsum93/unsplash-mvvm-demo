@@ -44,6 +44,12 @@ hockeyapp {
     notify = 0
     status = 2
 }
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
 dependencies {
     def lifecycle_version = "1.1.1"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -83,7 +89,8 @@ dependencies {
     implementation('androidx.core:core-ktx:0.3') {
         transitive = false
     }
-
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.23.4'
     // Anko (Kotlin)
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation "org.jetbrains.anko:anko-design:$anko_version"

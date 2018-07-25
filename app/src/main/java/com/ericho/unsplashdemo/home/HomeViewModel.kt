@@ -8,10 +8,12 @@ import android.os.Handler
 import com.ericho.unsplashdemo.BuildConfig
 import com.ericho.unsplashdemo.SingleLiveEvent
 import com.ericho.unsplashdemo.data.Photo
+import com.ericho.unsplashdemo.data.Result
 import com.ericho.unsplashdemo.data.source.PhotoDataSource
+import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
 
-class HomeViewModel(app: Application,photoDataSource: PhotoDataSource) : AndroidViewModel(app) {
+class HomeViewModel(app: Application,val photoDataSource: PhotoDataSource) : AndroidViewModel(app) {
 
     val title: ObservableField<String> = ObservableField()
     val firstImageUrl: ObservableField<String> = ObservableField()
@@ -32,15 +34,7 @@ class HomeViewModel(app: Application,photoDataSource: PhotoDataSource) : Android
         function1Text.set("List Latest Image")
         function2Text.set("Other")
 
-        photoDataSource.getPhoto("Hd7vwFzZpH0",object :PhotoDataSource.PhotoCallback{
-            override fun onPhotoLoaded(photo: Photo) {
-                firstImageUrl.set(photo.link)
-            }
-
-            override fun onError(e: Throwable) {
-                Timber.w(e)
-            }
-        })
+        loadOneImage("Hd7vwFzZpH0")
     }
     fun onClickFriend() {
 
@@ -55,5 +49,14 @@ class HomeViewModel(app: Application,photoDataSource: PhotoDataSource) : Android
 
     fun onImageClick(){
         imageClickCommand.value = firstImageUrl.get()
+    }
+
+
+    private fun loadOneImage(id:String) = launch {
+        val result = photoDataSource.getPhoto(id)
+        when(result){
+            is Result.Success -> firstImageUrl.set(result.data.link)
+            else -> {}
+        }
     }
 }

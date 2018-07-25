@@ -1,14 +1,15 @@
 package com.ericho.unsplashdemo.data.source
 
 import com.ericho.unsplashdemo.data.Photo
+import com.ericho.unsplashdemo.data.Result
 
 interface PhotoDataSource {
 
 
-    fun getRandomPhoto(callback: PhotoCallback)
-    fun getPhoto(id:String,callback: PhotoCallback)
+    suspend fun getRandomPhoto():Result<Photo>
+    suspend fun getPhoto(id:String):Result<Photo>
 
-    fun listPhoto(callback: LoadPhotoCallback)
+    suspend fun listPhoto():Result<List<Photo>>
 
 
     interface PhotoCallback{

@@ -1,7 +1,7 @@
 package com.ericho.unsplashdemo.data.source
 
 import com.ericho.unsplashdemo.data.Photo
-import com.ericho.unsplashdemo.data.source.remote.PhotoResponse
+import com.ericho.unsplashdemo.data.Result
 
 class PhotoRepository(
         private val photoRemoteDataSource: PhotoDataSource,
@@ -12,47 +12,46 @@ class PhotoRepository(
 
 
 
-    override fun getRandomPhoto(callback: PhotoDataSource.PhotoCallback) {
+    override suspend fun getRandomPhoto(): Result<Photo> {
+        if (cache["random"] !=null){
+            val a = cache["random"]!!
+            return Result.Success(a)
+        }
+        val r = photoRemoteDataSource.getRandomPhoto()
+        when(r){
+            is Result.Success ->{
+                cache["random"] = r.data
+            }
+        }
+        return r
+    }
 
-        if (cache.get("random") !=null){
-            val a = cache.get("random")
-            return callback.onPhotoLoaded(a!!)
+    override suspend fun getPhoto(id: String): Result<Photo> {
+        if (cache[id] !=null){
+            val a = cache[id]!!
+            return Result.Success(a)
         }
 
-
-        photoRemoteDataSource.getRandomPhoto(object :PhotoDataSource.PhotoCallback{
-            override fun onPhotoLoaded(photo: Photo) {
-                cache.put("random",photo)
-                callback.onPhotoLoaded(photo)
-            }
-
-            override fun onError(e: Throwable) {
-                callback.onError(e)
-            }
-        })
-    }
-
-    override fun getPhoto(id: String, callback: PhotoDataSource.PhotoCallback) {
-        if (cache.get(id) !=null){
-            val a = cache.get(id)
-            return callback.onPhotoLoaded(a!!)
+        val r = photoRemoteDataSource.getRandomPhoto()
+        when(r){
+            is Result.Success -> cache[id] = r.data
         }
-
-        photoRemoteDataSource.getPhoto(id,object :PhotoDataSource.PhotoCallback{
-            override fun onPhotoLoaded(photo: Photo) {
-                cache.put(id,photo)
-                callback.onPhotoLoaded(photo)
-            }
-
-            override fun onError(e: Throwable) {
-                callback.onError(e)
-            }
-        })
+        return r
     }
 
-    override fun listPhoto(callback: PhotoDataSource.LoadPhotoCallback) {
-        photoRemoteDataSource.listPhoto( callback)
+    override suspend fun listPhoto(): Result<List<Photo>> {
+        //todo find local cache
+
+        //
+        val r = photoRemoteDataSource.listPhoto()
+        when(r){
+            is Result.Success ->{
+                // cache to local
+            }
+        }
+        return r
     }
+
 
     companion object {
 

@@ -1,85 +1,50 @@
 package com.ericho.unsplashdemo.data.source.remote
 
 import com.ericho.unsplashdemo.data.Photo
+import com.ericho.unsplashdemo.data.Result
 import com.ericho.unsplashdemo.data.source.PhotoDataSource
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
+import kotlin.coroutines.experimental.suspendCoroutine
 
 object PhotoRemoteDataSource : PhotoDataSource {
 
     val photoService:PhotoService by lazy { PhotoService.Factory.create() }
 
-    override fun getRandomPhoto(callback: PhotoDataSource.PhotoCallback) {
 
+    override suspend fun getRandomPhoto(): Result<Photo>  = suspendCoroutine {
         val z = photoService.getRandomImage()
-        z.enqueue(object :Callback<PhotoResponse>{
-            override fun onFailure(call: Call<PhotoResponse>?, t: Throwable?) {
-                callback.onError(t!!)
-            }
+        val response = z.execute()
+        if (response.isSuccessful.not()){
+            it.resume(Result.Failure(IOException("connection code: ${response.code()}")))
+        }
 
-            override fun onResponse(call: Call<PhotoResponse>?, response: Response<PhotoResponse>?) {
-
-                if (!response!!.isSuccessful) {
-                    callback.onError(IOException("code = ${response.code()}"))
-                }
-
-                val photoResponse = response.body()
-                Timber.d(photoResponse.toString())
-
-                val newP = photoResponse!!.toPhoto()
-
-                callback.onPhotoLoaded(newP)
-            }
-        })
-
-
+        val photo = response.body()!!.toPhoto()
+        it.resume(Result.Success(photo))
     }
-
-    override fun listPhoto(callback: PhotoDataSource.LoadPhotoCallback) {
-        val aaaCall = photoService.listPhoto()
-        aaaCall.enqueue(object :Callback<List<PhotoResponse>>{
-            override fun onFailure(call: Call<List<PhotoResponse>>?, t: Throwable?) {
-                callback.onError(t!!)
-            }
-
-            override fun onResponse(call: Call<List<PhotoResponse>>?, response: Response<List<PhotoResponse>>?) {
-                if (!response!!.isSuccessful) {
-                    callback.onError(IOException("code = ${response.code()}"))
-                }
-
-                val list = response.body()
-
-                Timber.d("ABC")
-
-                val newList = list?.map { it.toPhoto() } ?: listOf()
-                callback.onPhotoLoaded(newList)
-            }
-        })
-    }
-
-    override fun getPhoto(id: String, callback: PhotoDataSource.PhotoCallback) {
+    override suspend fun getPhoto(id: String): Result<Photo>  = suspendCoroutine {
         val z = photoService.getPhoto(id)
-        z.enqueue(object :Callback<PhotoResponse>{
-            override fun onFailure(call: Call<PhotoResponse>?, t: Throwable?) {
-                callback.onError(t!!)
-            }
+        val response = z.execute()
+        if (response.isSuccessful.not()){
+            it.resume(Result.Failure(IOException("connection code: ${response.code()}")))
+        }
 
-            override fun onResponse(call: Call<PhotoResponse>?, response: Response<PhotoResponse>?) {
+        val photo = response.body()!!.toPhoto()
+        it.resume(Result.Success(photo))
+    }
 
-                if (!response!!.isSuccessful) {
-                    callback.onError(IOException("code = ${response.code()}"))
-                }
+    override suspend fun listPhoto(): Result<List<Photo>> = suspendCoroutine{
+        val z = photoService.listPhoto()
+        val response = z.execute()
+        if (response.isSuccessful.not()){
+            it.resume(Result.Failure(IOException("connection code: ${response.code()}")))
+        }
 
-                val photoResponse = response.body()
-                Timber.d(photoResponse.toString())
+        val list = response.body()
 
-                val newP = photoResponse!!.toPhoto()
+        Timber.d("ABC")
 
-                callback.onPhotoLoaded(newP)
-            }
-        })
+        val newList = list?.map { it.toPhoto() } ?: listOf()
+        it.resume(Result.Success(newList))
     }
 }

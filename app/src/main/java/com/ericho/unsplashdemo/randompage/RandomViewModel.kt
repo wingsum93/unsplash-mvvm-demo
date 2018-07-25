@@ -6,8 +6,10 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableList
 import com.ericho.unsplashdemo.SingleLiveEvent
 import com.ericho.unsplashdemo.data.Photo
+import com.ericho.unsplashdemo.data.Result
 import com.ericho.unsplashdemo.data.source.PhotoDataSource
 import com.ericho.unsplashdemo.data.source.PhotoRepository
+import kotlinx.coroutines.experimental.launch
 
 class RandomViewModel(
         private val photoRepository: PhotoRepository
@@ -28,18 +30,14 @@ class RandomViewModel(
         loadData()
     }
 
-    private fun loadData() {
-        photoRepository.listPhoto(object :PhotoDataSource.LoadPhotoCallback{
-            override fun onPhotoLoaded(photos: List<Photo>) {
-                items.apply{
-                    clear()
-                    addAll(photos)
-                }
+    private fun loadData() = launch{
+        val photos = photoRepository.listPhoto()
+        when(photos){
+            is Result.Success ->items.apply{
+                clear()
+                addAll(photos.data)
             }
+        }
 
-            override fun onError(e: Throwable) {
-
-            }
-        })
     }
 }
