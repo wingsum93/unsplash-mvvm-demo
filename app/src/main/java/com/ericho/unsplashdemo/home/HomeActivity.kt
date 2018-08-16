@@ -4,6 +4,9 @@ import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 
 import com.ericho.unsplashdemo.R
@@ -26,6 +29,26 @@ open class HomeActivity : AppCompatActivity() {
         binding.model = model
 
         subscribeListener(model)
+
+        setUpDrawer()
+    }
+
+    private fun setUpDrawer() {
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val navigationView = findViewById<NavigationView>(R.id.navigationView)
+
+        supportActionBar?.apply {
+            setHomeButtonEnabled(true)
+
+        }
+
+        navigationView.setNavigationItemSelectedListener {
+            menuItem->
+            menuItem.isChecked = true
+
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
     }
 
     private fun subscribeListener(model: HomeViewModel) {
